@@ -34,7 +34,7 @@
                                     <constraint firstAttribute="width" constant="192" id="twM-yD-Ohv"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kqv-Ck-gSU">
                                 <rect key="frame" x="152" y="322" width="72" height="30"/>
@@ -98,7 +98,10 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="NewUserText" destination="scT-6A-AjY" id="JJ2-aO-iGr"/>
+                        <outlet property="loginToSignupButton" destination="kqv-Ck-gSU" id="N90-CJ-fAc"/>
                         <outlet property="password" destination="fkN-5K-iMm" id="pBj-sz-bHa"/>
+                        <outlet property="signupToLoginButton" destination="9DJ-O0-HgN" id="Iyi-HU-XQH"/>
                         <outlet property="username" destination="8OB-0n-Rzz" id="HAq-aP-0j7"/>
                     </connections>
                 </viewController>
