@@ -10,17 +10,70 @@
 // This class will controll the table view (the screen after user has logged in)
 // ***********
 import UIKit
+import Parse
 
 class TableViewController: UITableViewController {
-
+    
+    // This is the array that stores the usernames that will be displayed in our table.
+    var usernames = [""]
+    // We will track user followers by using their objectId
+    var userids = [""]
+    // Track who the current user is following:
+    var isFollowing = [false]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Scan through the online-stored parse data and put the usernames & ids to the global areas above.
+        var query = PFUser.query()
+        query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+            if let users = objects {
+                // Remove current elements in array (including empty)
+                self.usernames.removeAll(keepCapacity: true)
+                self.userids.removeAll(keepCapacity: true)
+                self.isFollowing.removeAll(keepCapacity: true)
+                for object in users {
+                    if let user = object as? PFUser {
+                        // Add all but the current user to the table view:
+                        if user.objectId != PFUser.currentUser()?.objectId {
+                            self.usernames.append(user.username!)
+                            self.userids.append(user.objectId!)
+                            /// /// ///
+                            // ** Update the followers of the current user from parse:
+                            var query = PFQuery(className: "followers")
+                            // We need to make sure two conditions for the checkmarks to be updated:
+                            // Search the parse online data to see if the current user [PFUser...] is a [follower] of any [following]
+                            query.whereKey("follower", equalTo: PFUser.currentUser()!.objectId!)
+                            // Also make sure that the person that current user is following is the actual tapped user
+                            query.whereKey("following", equalTo: user.objectId!)
+                            
+                            // The loop query will run true if the two function above where successfully satisfied:
+                            // Now scan through the current users and check them off:
+                            query.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+                                if let objects = objects {
+                                    
+                                    if objects.count > 0 {
+                                    
+                                        self.isFollowing.append(true) // These boolean statements will feed the [following] array
+                                        } else {
+                                        self.isFollowing.append(false)
+                                    }
+                                }
+                                if self.isFollowing.count == self.usernames.count {
+                                
+                                    // Push the new data to the table:
+                                    self.tableView.reloadData()
+                                    
+                                }
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+                            })
+                            /// /// ///
+                        }
+                    }
+                }
+            }
+            
+                    })
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,63 +89,45 @@ class TableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 3
+        // Have as many rows as there are users:
+        return usernames.count
     }
 
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
         
-        cell.textLabel?.text = "Test"
-
+        // The text in each row should be the specific user:
+        cell.textLabel?.text = usernames[indexPath.row]
+        
+        // We will give check-marks to the users that are in the [following] array:
+        if isFollowing[indexPath.row] == true {
+             cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+        }
         return cell
     }
 
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+       ////////    ////////    ////////    ////////
+    //*** This runs when a user taps on a cell ****//
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print(indexPath.row)
+        
+        // Update table with a check-mark to indicate that current user is following already:
+        //  Get the tapped cell and add a check mark:
+        var cell:UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
+        cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+        
+        
+        var following = PFObject(className: "followers")
+        // Add the tapped user-id in the following column:
+        following["following"] = userids[indexPath.row]
+        // Add the current user as a follower to the table
+        following["follower"] = PFUser.currentUser()?.objectId
+        // push to the parse server:
+        following.saveInBackground()
+        
+        
+        
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    ////////    ////////    ////////    ////////    ////////
 }
