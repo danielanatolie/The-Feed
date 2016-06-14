@@ -27,7 +27,7 @@ class ViewController: UIViewController {
     
   
     
-    // Used to freez the screen when signup information is being verified
+    // Used to freeze the screen when signup information is being verified
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     // *Helper Function to display alert pop-up*:
@@ -84,6 +84,8 @@ class ViewController: UIViewController {
             
             if user != nil {
                 // Logged in!
+                // Segue into the Navigation Controller:
+                self.performSegueWithIdentifier("login", sender: self)
                 
             } else {
                 if let errorString = error!.userInfo["error"] as? String {
@@ -136,6 +138,8 @@ class ViewController: UIViewController {
                 // Check if sign-up is successful:
                 if error == nil {
                     // sign-upsuccessful
+                    // Segue into the Navigation Controller:
+                    self.performSegueWithIdentifier("login", sender: self)
                     
                 } else {
                     if let errorString = error!.userInfo["error"] as? String {
@@ -153,6 +157,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    }
+    
+    // Check if there is a current user logged in and if so, perform the segue 
+    override func viewDidAppear(animated: Bool) {
+        if PFUser.currentUser() != nil {
+            self.performSegueWithIdentifier("login", sender: self)
+        }
     }
     
 
