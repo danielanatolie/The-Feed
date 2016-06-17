@@ -21,8 +21,11 @@ class TableViewController: UITableViewController {
     // Track who the current user is following dictionary:
     var isFollowing = ["":false]
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    // Pull to Refresh variable (forced unwrapped):
+    var refresher: UIRefreshControl!
+    
+    // Refresh function for [Pull to Refresh]
+    func refresh() {
         
         // Scan through the online-stored parse data and put the usernames & ids to the global areas above.
         var query = PFUser.query()
@@ -53,19 +56,20 @@ class TableViewController: UITableViewController {
                                 if let objects = objects {
                                     
                                     if objects.count > 0 {
-                                    
+                                        
                                         self.isFollowing[user.objectId!] = true // These boolean statements will feed the [following] array
-                                        } else {
+                                    } else {
                                         self.isFollowing[user.objectId!] = false
                                     }
                                 }
                                 if self.isFollowing.count == self.usernames.count {
-                                
+                                    
                                     // Push the new data to the table:
                                     self.tableView.reloadData()
-                                    
+                                    // End the refreshing after table has been updated:
+                                    self.refresher.endRefreshing()
                                 }
-
+                                
                             })
                             /// /// ///
                         }
@@ -73,8 +77,28 @@ class TableViewController: UITableViewController {
                 }
             }
             
-                    })
+        })
+        
+        
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // *** Pull to Refresh *** //
+        refresher = UIRefreshControl()
+        // String will appear when user begins to pull the table:
+        refresher.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        // Run the refresh function when the screen was pulled (aka .ValueChanged)
+        refresher.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
+        
+        self.tableView.addSubview(refresher)
+        
+        refresh()
+        
+        /// /// /// /// /// /// /// ///
+        
+           }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -136,6 +160,8 @@ class TableViewController: UITableViewController {
             isFollowing[followedObjectId] = false
             cell.accessoryType = UITableViewCellAccessoryType.None
             // Same query from the code above:
+            
+            
             
             // ** Update the followers of the current user from parse:
             var query = PFQuery(className: "followers")

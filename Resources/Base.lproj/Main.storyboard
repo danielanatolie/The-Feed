@@ -136,11 +136,64 @@
                             <outlet property="delegate" destination="XDp-S9-rNa" id="UPI-xx-qaL"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="User List" id="94S-sv-sMO"/>
+                    <navigationItem key="navigationItem" title="User List" id="94S-sv-sMO">
+                        <barButtonItem key="rightBarButtonItem" title="Post" id="Ta3-cG-Qgi">
+                            <connections>
+                                <segue destination="SKE-sk-TKv" kind="show" id="llZ-ZM-UeK"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9N0-vz-vTn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1824" y="222"/>
+            <point key="canvasLocation" x="1591.5" y="221.5"/>
+        </scene>
+        <!--Post an Image-->
+        <scene sceneID="Ieu-oQ-ZN0">
+            <objects>
+                <viewController title="Post an Image" id="SKE-sk-TKv" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Tsr-Vl-tKn"/>
+                        <viewControllerLayoutGuide type="bottom" id="ORT-sM-phC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="AGc-Xl-KPp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vef-NQ-JKB">
+                                <rect key="frame" x="37" y="134" width="300" height="276"/>
+                                <animations/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9qQ-yb-euG">
+                                <rect key="frame" x="139" y="531" width="96" height="30"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.18431372549019609" green="0.51372549019607838" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Post Image">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="0.18431372549019609" green="0.51372549019607838" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z7R-RW-xmN">
+                                <rect key="frame" x="37" y="484" width="300" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nDL-lp-omF">
+                                <rect key="frame" x="128" y="437" width="119" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Choose an Image"/>
+                            </button>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ePb-hV-O9m" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2087.5" y="221.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="vDe-Ce-0IA">
