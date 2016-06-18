@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -152,7 +153,7 @@
         <!--Post an Image-->
         <scene sceneID="Ieu-oQ-ZN0">
             <objects>
-                <viewController title="Post an Image" id="SKE-sk-TKv" sceneMemberID="viewController">
+                <viewController title="Post an Image" id="SKE-sk-TKv" customClass="PostImageViewController" customModule="ParseStarterProject_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Tsr-Vl-tKn"/>
                         <viewControllerLayoutGuide type="bottom" id="ORT-sM-phC"/>
@@ -161,35 +162,66 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vef-NQ-JKB">
-                                <rect key="frame" x="37" y="134" width="300" height="276"/>
-                                <animations/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9qQ-yb-euG">
-                                <rect key="frame" x="139" y="531" width="96" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9qQ-yb-euG">
+                                <rect key="frame" x="130" y="508" width="114" height="41"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.18431372549019609" green="0.51372549019607838" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="114" id="ctA-M9-z8X"/>
+                                </constraints>
                                 <state key="normal" title="Post Image">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" red="0.18431372549019609" green="0.51372549019607838" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="postImage:" destination="SKE-sk-TKv" eventType="touchUpInside" id="PhK-Yx-Ulp"/>
+                                </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z7R-RW-xmN">
-                                <rect key="frame" x="37" y="484" width="300" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z7R-RW-xmN">
+                                <rect key="frame" x="20" y="462" width="335" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nDL-lp-omF">
-                                <rect key="frame" x="128" y="437" width="119" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nDL-lp-omF">
+                                <rect key="frame" x="128" y="424" width="119" height="30"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="119" id="qPA-VK-RzL"/>
+                                </constraints>
                                 <state key="normal" title="Choose an Image"/>
+                                <connections>
+                                    <action selector="chooseImage:" destination="SKE-sk-TKv" eventType="touchUpInside" id="Pa2-n6-aac"/>
+                                </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeHolder.png" translatesAutoresizingMaskIntoConstraints="NO" id="ucQ-cf-JBy">
+                                <rect key="frame" x="38" y="109" width="299" height="298"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="298" id="8Em-jc-ZYR"/>
+                                    <constraint firstAttribute="width" constant="299" id="fas-qB-B29"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Z7R-RW-xmN" firstAttribute="trailing" secondItem="AGc-Xl-KPp" secondAttribute="trailingMargin" id="0JB-Ut-rFT"/>
+                            <constraint firstItem="nDL-lp-omF" firstAttribute="top" secondItem="ucQ-cf-JBy" secondAttribute="bottom" constant="17" id="3DL-5F-F9B"/>
+                            <constraint firstItem="9qQ-yb-euG" firstAttribute="centerX" secondItem="AGc-Xl-KPp" secondAttribute="centerX" id="7F7-k7-H8Q"/>
+                            <constraint firstItem="ucQ-cf-JBy" firstAttribute="top" secondItem="Tsr-Vl-tKn" secondAttribute="bottom" constant="45" id="I8x-SC-BKi"/>
+                            <constraint firstItem="9qQ-yb-euG" firstAttribute="top" secondItem="Z7R-RW-xmN" secondAttribute="bottom" constant="16" id="Og5-rt-d94"/>
+                            <constraint firstItem="nDL-lp-omF" firstAttribute="centerX" secondItem="AGc-Xl-KPp" secondAttribute="centerX" id="XcY-B6-QAs"/>
+                            <constraint firstItem="Z7R-RW-xmN" firstAttribute="top" secondItem="nDL-lp-omF" secondAttribute="bottom" constant="8" id="cxR-I1-feK"/>
+                            <constraint firstItem="ucQ-cf-JBy" firstAttribute="centerX" secondItem="AGc-Xl-KPp" secondAttribute="centerX" id="fn6-pf-rI2"/>
+                            <constraint firstItem="Z7R-RW-xmN" firstAttribute="leading" secondItem="AGc-Xl-KPp" secondAttribute="leadingMargin" id="l8Q-nO-KqK"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="imageToPost" destination="ucQ-cf-JBy" id="AoT-r0-0gH"/>
+                        <outlet property="message" destination="Z7R-RW-xmN" id="45j-2L-An3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ePb-hV-O9m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -213,4 +245,7 @@
             <point key="canvasLocation" x="1004" y="222"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="placeHolder.png" width="300" height="300"/>
+    </resources>
 </document>
