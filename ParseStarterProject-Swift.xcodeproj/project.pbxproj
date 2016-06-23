@@ -19,6 +19,8 @@
 		81BA817F1A49E0F000E65899 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA817E1A49E0F000E65899 /* libstdc++.6.dylib */; };
 		AA5B18281D14635C0064E8C3 /* PostImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B18271D14635C0064E8C3 /* PostImageViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		AA5B182A1D14FC1C0064E8C3 /* placeHolder.png in Resources */ = {isa = PBXBuildFile; fileRef = AA5B18291D14FC1C0064E8C3 /* placeHolder.png */; settings = {ASSET_TAGS = (); }; };
+		AADC46E71D1B15AD008F1AB5 /* cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADC46E61D1B15AD008F1AB5 /* cell.swift */; settings = {ASSET_TAGS = (); }; };
+		AADC46E91D1B1773008F1AB5 /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADC46E81D1B1773008F1AB5 /* FeedTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		AAEB6C651D0FB84100A37E51 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEB6C641D0FB84100A37E51 /* TableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
@@ -39,6 +41,8 @@
 		81BA81801A49E10C00E65899 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		AA5B18271D14635C0064E8C3 /* PostImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostImageViewController.swift; sourceTree = "<group>"; };
 		AA5B18291D14FC1C0064E8C3 /* placeHolder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeHolder.png; sourceTree = "<group>"; };
+		AADC46E61D1B15AD008F1AB5 /* cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cell.swift; sourceTree = "<group>"; };
+		AADC46E81D1B1773008F1AB5 /* FeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
 		AAEB6C641D0FB84100A37E51 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,6 +97,8 @@
 				81BA814C1A49DA1800E65899 /* ViewController.swift */,
 				AAEB6C641D0FB84100A37E51 /* TableViewController.swift */,
 				814C3AC61B69877600E307BB /* Main.storyboard */,
+				AADC46E61D1B15AD008F1AB5 /* cell.swift */,
+				AADC46E81D1B1773008F1AB5 /* FeedTableViewController.swift */,
 				AA5B18271D14635C0064E8C3 /* PostImageViewController.swift */,
 				AA5B18291D14FC1C0064E8C3 /* placeHolder.png */,
 			);
@@ -194,8 +200,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA5B18281D14635C0064E8C3 /* PostImageViewController.swift in Sources */,
+				AADC46E91D1B1773008F1AB5 /* FeedTableViewController.swift in Sources */,
 				81BA814D1A49DA1800E65899 /* ViewController.swift in Sources */,
 				AAEB6C651D0FB84100A37E51 /* TableViewController.swift in Sources */,
+				AADC46E71D1B15AD008F1AB5 /* cell.swift in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
